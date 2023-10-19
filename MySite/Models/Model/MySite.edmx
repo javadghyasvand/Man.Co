@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MySiteDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="About">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FileTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ImageTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleProject" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="LinkProject" Type="nvarchar" MaxLength="450" />
+          <Property Name="ImageProject" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DescriptionProject" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VideoProject" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="GroupImage" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="GroupDescription" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SelectProjectGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MetaTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="MetaKeywords" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="ParentTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="350" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Gallery_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Gallery" Type="Self.Gallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gallery">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectProjectGroup_ProjectGroups">
+          <End Role="ProjectGroups" Type="Self.ProjectGroups" Multiplicity="1" />
+          <End Role="SelectProjectGroup" Type="Self.SelectProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectProjectGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectProjectGroup_SelectProjectGroup">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="SelectProjectGroup" Type="Self.SelectProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectProjectGroup">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seo_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Seo" Type="Self.Seo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seo">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MySiteDataModelStoreContainer">
+          <EntitySet Name="About" EntityType="Self.About" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectGroups" EntityType="Self.ProjectGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SelectProjectGroup" EntityType="Self.SelectProjectGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seo" EntityType="Self.Seo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Gallery_Project" Association="Self.FK_Gallery_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Gallery" EntitySet="Gallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectProjectGroup_ProjectGroups" Association="Self.FK_SelectProjectGroup_ProjectGroups">
+            <End Role="ProjectGroups" EntitySet="ProjectGroups" />
+            <End Role="SelectProjectGroup" EntitySet="SelectProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectProjectGroup_SelectProjectGroup" Association="Self.FK_SelectProjectGroup_SelectProjectGroup">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="SelectProjectGroup" EntitySet="SelectProjectGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seo_Project1" Association="Self.FK_Seo_Project1">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Seo" EntitySet="Seo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MySiteDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="About">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Link" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MySiteDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="About" EntityType="Self.About" />
+          <EntitySet Name="Gallery" EntityType="MySiteDataModel.Gallery" />
+          <EntitySet Name="SelectProjectGroup" EntityType="MySiteDataModel.SelectProjectGroup" />
+          <EntitySet Name="Project" EntityType="MySiteDataModel.Project" />
+          <AssociationSet Name="FK_Gallery_Project" Association="MySiteDataModel.FK_Gallery_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Gallery" EntitySet="Gallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectProjectGroup_SelectProjectGroup" Association="MySiteDataModel.FK_SelectProjectGroup_SelectProjectGroup">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="SelectProjectGroup" EntitySet="SelectProjectGroup" />
+          </AssociationSet>
+          <EntitySet Name="ProjectGroups" EntityType="MySiteDataModel.ProjectGroups" />
+          <AssociationSet Name="FK_SelectProjectGroup_ProjectGroups" Association="MySiteDataModel.FK_SelectProjectGroup_ProjectGroups">
+            <End Role="ProjectGroups" EntitySet="ProjectGroups" />
+            <End Role="SelectProjectGroup" EntitySet="SelectProjectGroup" />
+          </AssociationSet>
+          <EntitySet Name="Seo" EntityType="MySiteDataModel.Seo" />
+          <AssociationSet Name="FK_Seo_Project1" Association="MySiteDataModel.FK_Seo_Project1">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Seo" EntitySet="Seo" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Gallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ImageTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="MySiteDataModel.FK_Gallery_Project" FromRole="Gallery" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="SelectProjectGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="MySiteDataModel.FK_SelectProjectGroup_SelectProjectGroup" FromRole="SelectProjectGroup" ToRole="Project" />
+          <NavigationProperty Name="ProjectGroups" Relationship="MySiteDataModel.FK_SelectProjectGroup_ProjectGroups" FromRole="SelectProjectGroup" ToRole="ProjectGroups" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleProject" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="LinkProject" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="ImageProject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionProject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoProject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Gallery" Relationship="MySiteDataModel.FK_Gallery_Project" FromRole="Project" ToRole="Gallery" />
+          <NavigationProperty Name="SelectProjectGroup" Relationship="MySiteDataModel.FK_SelectProjectGroup_SelectProjectGroup" FromRole="Project" ToRole="SelectProjectGroup" />
+          <NavigationProperty Name="Seo" Relationship="MySiteDataModel.FK_Seo_Project1" FromRole="Project" ToRole="Seo" />
+          </EntityType>
+        <Association Name="FK_Gallery_Project">
+          <End Type="MySiteDataModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="MySiteDataModel.Gallery" Role="Gallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gallery">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectProjectGroup_SelectProjectGroup">
+          <End Type="MySiteDataModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="MySiteDataModel.SelectProjectGroup" Role="SelectProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectProjectGroup">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProjectGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="GroupImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="GroupDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SelectProjectGroup" Relationship="MySiteDataModel.FK_SelectProjectGroup_ProjectGroups" FromRole="ProjectGroups" ToRole="SelectProjectGroup" />
+        </EntityType>
+        <Association Name="FK_SelectProjectGroup_ProjectGroups">
+          <End Type="MySiteDataModel.ProjectGroups" Role="ProjectGroups" Multiplicity="1" />
+          <End Type="MySiteDataModel.SelectProjectGroup" Role="SelectProjectGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectProjectGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Seo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MetaTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKeywords" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="ParentTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="MySiteDataModel.FK_Seo_Project1" FromRole="Seo" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Seo_Project1">
+          <End Type="MySiteDataModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="MySiteDataModel.Seo" Role="Seo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seo">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MySiteDataModelStoreContainer" CdmEntityContainer="MySiteDataEntities">
+          <EntitySetMapping Name="About">
+            <EntityTypeMapping TypeName="MySiteDataModel.About">
+              <MappingFragment StoreEntitySet="About">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileTitle" ColumnName="FileTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gallery">
+            <EntityTypeMapping TypeName="MySiteDataModel.Gallery">
+              <MappingFragment StoreEntitySet="Gallery">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SelectProjectGroup">
+            <EntityTypeMapping TypeName="MySiteDataModel.SelectProjectGroup">
+              <MappingFragment StoreEntitySet="SelectProjectGroup">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="MySiteDataModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="VideoProject" ColumnName="VideoProject" />
+                <ScalarProperty Name="DescriptionProject" ColumnName="DescriptionProject" />
+                <ScalarProperty Name="ImageProject" ColumnName="ImageProject" />
+                <ScalarProperty Name="LinkProject" ColumnName="LinkProject" />
+                <ScalarProperty Name="TitleProject" ColumnName="TitleProject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectGroups">
+            <EntityTypeMapping TypeName="MySiteDataModel.ProjectGroups">
+              <MappingFragment StoreEntitySet="ProjectGroups">
+                <ScalarProperty Name="GroupDescription" ColumnName="GroupDescription" />
+                <ScalarProperty Name="GroupImage" ColumnName="GroupImage" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seo">
+            <EntityTypeMapping TypeName="MySiteDataModel.Seo">
+              <MappingFragment StoreEntitySet="Seo">
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="ParentTitle" ColumnName="ParentTitle" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="MetaKeywords" ColumnName="MetaKeywords" />
+                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MySite.Models.Model.Project>
+
+@{
+    ViewBag.Title = "لیست نمونه کارها";
+}
+
+<div class="text-center m-3" dir="rtl">
+    <a href="@Url.Action("Create")" class="btn btn-primary waves-effect waves-primary w-50 m-3"><i class="la la-pencil-square-o mr-2"></i>افزودن نمونه کار</a>
+    @if (Model != null)
+    {
+        <table class="table text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TitleProject)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageProject)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TitleProject)
+                    </td>
+                    <td>
+                        <img src="~/images/ImageProject/@item.ImageProject" style="width: 150px;height: 200px" />
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("گالری", "Gallery", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

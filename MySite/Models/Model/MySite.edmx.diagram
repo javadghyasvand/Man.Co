@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f59754a34eb4126870fb467528eea39" Name="Diagram1">
+        <EntityTypeShape EntityType="MySiteDataModel.About" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySiteDataModel.Gallery" Width="1.5" PointX="5.625" PointY="1.25" />
+        <EntityTypeShape EntityType="MySiteDataModel.SelectProjectGroup" Width="1.5" PointX="1.125" PointY="8.5" />
+        <EntityTypeShape EntityType="MySiteDataModel.Project" Width="1.5" PointX="2.75" PointY="2.875" />
+        <AssociationConnector Association="MySiteDataModel.FK_Gallery_Project" />
+        <AssociationConnector Association="MySiteDataModel.FK_SelectProjectGroup_SelectProjectGroup" />
+        <EntityTypeShape EntityType="MySiteDataModel.ProjectGroups" Width="1.5" PointX="0.625" PointY="5.25" />
+        <AssociationConnector Association="MySiteDataModel.FK_SelectProjectGroup_ProjectGroups" />
+        <EntityTypeShape EntityType="MySiteDataModel.Seo" Width="1.5" PointX="5" PointY="5" />
+        <AssociationConnector Association="MySiteDataModel.FK_Seo_Project1" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

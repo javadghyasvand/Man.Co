@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MySiteDataModelStoreContainer" CdmEntityContainer="MySiteDataEntities">
+    <EntitySetMapping Name="Slider">
+      <EntityTypeMapping TypeName="MySiteDataModel.Slider">
+        <MappingFragment StoreEntitySet="Slider">
+          <ScalarProperty Name="SliderId" ColumnName="SliderId" />
+          <ScalarProperty Name="SliderTitle" ColumnName="SliderTitle" />
+          <ScalarProperty Name="SliderImage" ColumnName="SliderImage" />
+          <ScalarProperty Name="SliderStart" ColumnName="SliderStart" />
+          <ScalarProperty Name="SliderEnd" ColumnName="SliderEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MySiteDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="About">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Link" Type="nvarchar" MaxLength="450" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FileTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gallery">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ImageTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleProject" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="LinkProject" Type="nvarchar" MaxLength="450" />
+    <Property Name="ImageProject" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DescriptionProject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VideoProject" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="GroupImage" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="GroupDescription" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SelectProjectGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MetaTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MetaKeywords" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="MetaDescription" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="ParentTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="350" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Gallery_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="Gallery" Type="Self.Gallery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Gallery">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectProjectGroup_ProjectGroups">
+    <End Role="ProjectGroups" Type="Self.ProjectGroups" Multiplicity="1" />
+    <End Role="SelectProjectGroup" Type="Self.SelectProjectGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectGroups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SelectProjectGroup">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectProjectGroup_SelectProjectGroup">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="SelectProjectGroup" Type="Self.SelectProjectGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SelectProjectGroup">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seo_Project1">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="Seo" Type="Self.Seo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Seo">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MySiteDataModelStoreContainer">
+    <EntitySet Name="About" EntityType="Self.About" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectGroups" EntityType="Self.ProjectGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SelectProjectGroup" EntityType="Self.SelectProjectGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seo" EntityType="Self.Seo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Gallery_Project" Association="Self.FK_Gallery_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Gallery" EntitySet="Gallery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectProjectGroup_ProjectGroups" Association="Self.FK_SelectProjectGroup_ProjectGroups">
+      <End Role="ProjectGroups" EntitySet="ProjectGroups" />
+      <End Role="SelectProjectGroup" EntitySet="SelectProjectGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectProjectGroup_SelectProjectGroup" Association="Self.FK_SelectProjectGroup_SelectProjectGroup">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="SelectProjectGroup" EntitySet="SelectProjectGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seo_Project1" Association="Self.FK_Seo_Project1">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Seo" EntitySet="Seo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

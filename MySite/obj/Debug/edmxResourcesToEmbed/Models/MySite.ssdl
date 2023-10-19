@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MySiteDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="SliderId" />
+    </Key>
+    <Property Name="SliderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SliderTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="SliderImage" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="SliderStart" Type="datetime" Nullable="false" />
+    <Property Name="SliderEnd" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="MySiteDataModelStoreContainer">
+    <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

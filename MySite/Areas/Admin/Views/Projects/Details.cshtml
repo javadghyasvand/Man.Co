@@ -1,0 +1,58 @@
+﻿@model MySite.Models.Model.Project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoProject)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

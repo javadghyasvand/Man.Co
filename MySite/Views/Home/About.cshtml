@@ -1,0 +1,33 @@
+﻿@model MySite.Models.Model.About
+
+@if (Model != null)
+{
+    <section class="about-section section-padding" id="section_2">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 col-12">
+                    <div class="ratio ratio-1x1">
+                        <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                            <source src="~/images/VideoProject/@Model.FileName" type="video/mp4">
+                            @Model.FileTitle
+                        </video>
+                        <div class="about-video-info d-flex flex-column">
+                            <h4 class="mt-auto">@Model.FileTitle</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-12 mt-4 mt-lg-0 mx-auto text-center" >
+                    <h2 class="text-white">درباره ما</h2>
+                    <p class="text-white align-content-end" style="text-align: right" dir="rtl">
+                        @Html.Raw(Model.Description)
+                        <a href="#project_groups" class="smoothscroll btn custom-btn custom-border-btn mt-3 mb-4">زمینه کاری ما</a>
+                    </p>
+                </div>
+               
+            </div>
+        </div>
+    </section>
+}

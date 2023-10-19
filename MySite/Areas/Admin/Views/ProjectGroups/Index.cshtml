@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MySite.Models.Model.ProjectGroups>
+
+@{
+    ViewBag.Title = "لیست گروه ها";
+}
+<div class="text-center m-3" dir="rtl">
+    <a href="@Url.Action("Create")" class="btn btn-primary waves-effect waves-primary w-50 m-3"><i class="la la-pencil-square-o mr-2"></i>افزودن</a>
+    @if (Model != null)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroupName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroupImage)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GroupName)
+                    </td>
+                    <td>
+                        <img src="~/images/ImageGroups/@item.GroupImage" class="img-thumbnail" style="width: 150px;" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("ویرایش", "Edit", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿@model MySite.Models.Model.Project
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionProject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoProject)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

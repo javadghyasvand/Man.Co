@@ -1,0 +1,43 @@
+﻿@model MySite.Models.Model.About
+
+@{
+    ViewBag.Title = "درباره ما";
+}
+<div class="text-center m-3" dir="rtl">
+    @if (Model.Id != 0 || Model != null)
+    {
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-warning waves-effect waves-primary w-50 m-3"><i class="la la-pencil-square-o mr-2"></i>ویرایش</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Create")" class="btn btn-primary waves-effect waves-primary w-50 m-3"><i class="la la-pencil-square-o mr-2"></i>افزودن</a>
+    }
+    @if (Model != null)
+    {
+        <table class="table text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileTitle)
+                </th>
+                <th>
+                    فایل
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.FileTitle)
+                </td>
+                <td>
+                    <video class=" bg-light" autoplay style="width: 150px; height: 250px" autoplay controls muted>
+                        <source id="FileShow" src="~/images/VideoProject/@Model.FileName" type="video/mp4">
+                    </video>
+                </td>
+               
+            </tr>
+
+        </table>
+    }
+
+</div>
+

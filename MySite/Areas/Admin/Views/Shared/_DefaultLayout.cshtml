@@ -1,0 +1,59 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MS Admin Panel</title>
+    <link rel="shortcut icon" type="image/png" href="#">
+    <!-- Core Css -->
+    @Styles.Render("~/Content/AdminAssets/assets/css/datatables.min.css")
+    @Styles.Render("~/Content/AdminAssets/assets/css/line-awesome.min.css")
+    @Styles.Render("~/Content/AdminAssets/assets/css/jquery.mCustomScrollbar.css")
+    @Styles.Render("~/Content/AdminAssets/assets/css/bootstrap-select.min.css")
+    @Styles.Render("~/Content/AdminAssets/assets/css/bootstrap.css")
+    @Styles.Render("~/Content/AdminAssets/assets/css/bootstrap-slider.css")
+    <!-- Custom Css -->
+    @Styles.Render("~/Content/AdminAssets/assets/css/style.min.css")
+   
+</head>
+<body>
+<div class="overlay-background"></div>
+@Html.Partial("LeftPanel")
+@Html.Partial("Header")
+<section class="mainpanel mt-2">
+    <div class="pagebody">
+        <div class="card">
+            <div class="card-header py-4 text-center">
+                <h1 class="text-secondary font-weight-bold mb-0">@ViewBag.Title</h1>
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+</section>
+
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/jquery.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/popper.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/bootstrap-slider.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/bootstrap.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/bootstrap.bundle.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/bootstrap-select.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/bootstrap-tooltip-custom-class.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/jquery.mCustomScrollbar.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/Chart.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/datatables.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/ripple.min.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/custome.js")
+@Scripts.Render("~/Content/AdminAssets/assets/scripts/jquery.mousewheel.min.js")
+
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+@RenderSection("scripts", required: false)
+</body>
+</html>
