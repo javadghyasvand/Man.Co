@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MySite.Models.Model.Users>
+
+@{
+    ViewBag.Title = "لیست کاربران";
+}
+
+<div class="text-center m-3" dir="rtl">
+    <a href="@Url.Action("Create")" class="btn btn-primary waves-effect waves-primary w-50 m-3"><i class="la la-pencil-square-o mr-2"></i>افزودن کاربر جدید</a>
+    @if (Model != null)
+    {
+        <table class="table text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserImage)
+                </th>
+                <th>
+                    دسترسی
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserPhone)
+                    </td>
+                    <td>
+                        <img src="~/images/ImageUser/@item.UserImage" style="width: 150px; height: 150px"/>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Roles.RoleTitle)
+                    </td>
+                    <td>
+                        @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) |
+                      
+                        @Html.ActionLink("تغییر کلمه عبور", "ChangePassword", new { id = item.Id }) |
+                        @if (item.UserActive == true)
+                        {
+                            @Html.ActionLink("غیر فعال کردن حساب", "UserBan", new { id = item.Id })
+                        }
+                        else
+                        {
+                            @Html.ActionLink(" فعال کردن حساب", "UserunBan", new { id = item.Id })
+                        }
+
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="MyModalBody">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function CreateHeadrGroup(parentId) {
+        $.get("/Admin/Users/ChangePassword/" + parentId, function (result) {
+            $("#MyModal").modal();
+            $("#MyModalLabel").html("تغییر کلمه عبور");
+            $("#MyModalBody").html(result);
+        });
+    }
+</script>

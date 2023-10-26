@@ -1,0 +1,62 @@
+﻿@using MySite.Data
+@using MySite.Models.Model
+@model MySite.Models.Model.Contact
+@{
+    ViewBag.Title = "ارتباط با ما";
+    MySiteDataEntities db = new MySiteDataEntities();
+    ViewBag.Discription = db.About.SingleOrDefault().Link;
+}
+<section class="booking-section-Masseage section-padding" dir="rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-12 mx-auto">
+                <div class="booking-form-wrap">
+                    <div class="row">
+                        <div class="col-lg-7 col-12 p-0">
+                            @using (Html.BeginForm("Message", "Message", FormMethod.Post, new { id = "Message", @class = "custom-form booking-form" }))
+                            {
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <h2 class="text-white">ارتباط با ما</h2>
+                                </div>
+                                @Html.AntiForgeryToken()
+
+
+                                <div class="booking-form-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="Name" id="Name" class="form-control" placeholder="نام و نام خانوادگی">
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-lg-6 col-12">
+                                            <input type="tel" class="form-control" name="PhoneNumber" placeholder="شماره تماس">
+                                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <input type="email" class="form-control" name="email" placeholder="ایمیل">
+                                            <textarea name="Message" rows="3" class="form-control" id="Message" placeholder="پیغام شما.."></textarea>
+                                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-10 col-8 mx-auto mt-2">
+                                            <button type="submit" class="form-control">ثبت</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-lg-5 col-12 p-0">
+                            <div class="booking-form-image-wrap">
+                                <img src="~/images/ImageSite/3.jpg" class="booking-form-image img-fluid" alt="MAAN">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

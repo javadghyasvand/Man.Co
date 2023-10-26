@@ -15,6 +15,10 @@
         <AssociationConnector Association="MySiteDataModel.FK_SelectProjectGroup_ProjectGroups" />
         <EntityTypeShape EntityType="MySiteDataModel.Seo" Width="1.5" PointX="5" PointY="5" />
         <AssociationConnector Association="MySiteDataModel.FK_Seo_Project1" />
+        <EntityTypeShape EntityType="MySiteDataModel.Contact" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="MySiteDataModel.Roles" Width="1.5" PointX="8.375" PointY="1.375" />
+        <EntityTypeShape EntityType="MySiteDataModel.Users" Width="1.5" PointX="10.625" PointY="1" />
+        <AssociationConnector Association="MySiteDataModel.FK_Users_Roles" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

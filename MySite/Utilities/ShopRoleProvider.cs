@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySite.Models.Model;
+using System;
+using System.Linq;
 using System.Web.Security;
 
 namespace MyShop.Utilities
@@ -14,16 +16,16 @@ namespace MyShop.Utilities
 
         public override string[] GetRolesForUser(string username)
         {
-            throw new NotImplementedException();
-            // using (EShopCoffe_DBEntities dbEntities = new EShopCoffe_DBEntities())
-            // {
-            //     var result = dbEntities.Users.Where(u => u.UserEmail == username).Select(u => u.Roles.RoleId).ToArray();
-            //
-            //     string[] resultstr = result.Select(i => i.ToString()).ToArray();
-            //
-            //     return resultstr;
-            //
-            // }
+         
+            using (MySiteDataEntities _db = new MySiteDataEntities())
+            {
+                var result = _db.Users.Where(u => u.UserEmail == username).Select(u => u.Roles.RolesId).ToArray();
+            
+                string[] resultstr = result.Select(i => i.ToString()).ToArray();
+            
+                return resultstr;
+            
+            }
         }
 
 

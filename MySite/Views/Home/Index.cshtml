@@ -1,9 +1,35 @@
 ﻿@using MySite.Models.Model
 @{
     ViewBag.Title = "صفحه اصلی";
+    ViewBag.Page = "indexPage";
+   
 }
-@* @Html.Partial("Navbar") *@
-@* @Html.Partial("Welcome") *@
-@* *@
-@* @Html.Partial("Samples") *@
-@* @Html.Partial("Blog") *@
+
+@section Welcome
+{
+    @Html.Action("Welcome")
+}
+
+@section About
+{
+    @Html.Action("About")
+}
+
+@section Groups
+{
+    @Html.Action("Groups")
+}
+
+@section Portfolio
+{
+    @Html.Action("Portfolio")
+}
+
+@* @section Blog *@
+@* { *@
+@*     @Html.Action("Blog") *@
+@* } *@
+@section Contact
+{
+    @Html.Action("Contact")
+}

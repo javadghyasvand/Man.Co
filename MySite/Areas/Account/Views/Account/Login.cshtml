@@ -1,0 +1,68 @@
+﻿@model MySite.Models.ViewModel.LoginViewModel
+@{
+    ViewBag.Title = "ورود";
+}
+
+
+<div id="mCSB_1" class="mCustomScrollBox text-center mCSB_inside" style="max-height: none;" tabindex="0">
+    <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y">
+        <section class="login-wrapper d-flex align-content-center justify-content-center  flex-wrap" style="overflow: hidden" >
+            <div class="w-100 mb-3 mb-lg-3">
+                <a href="\" class="text-center ">
+                    <img src="~/images/ImageSite/logo.png" alt="مان ارتباط" width="150">
+                </a>
+            </div>
+            <div class="login-form bg-white  p-lg-4 rounded" dir="rtl">
+                <div class="row">
+                    <div class="col-12 col-lg-6 d-none d-lg-flex pr-lg-2">
+                        <img src="~/images/ImageSite/login-mockup.svg" alt="مان ارتباط">
+                    </div>
+                    <div class="col-12 col-lg-6 pl-lg-2">
+                        <div class="pagetitle mb-4">
+                            <h2>@ViewBag.Title</h2>
+                        </div>
+                        @using (Html.BeginForm("Login","Account",FormMethod.Post))
+                        {
+                            if ((!User.Identity.IsAuthenticated || Request.QueryString["ReturnUrl"] != null))
+                            {
+                                <hr/>
+                                <div class="alert alert-danger mt-1 text-center">
+                                    <p>لطفا وارد اکانت خود شود</p>
+                                </div>
+                            }
+                            if (!string.IsNullOrEmpty(ViewBag.Error)) { 
+                                <div class="alert alert-danger mt-1 text-center">
+                                    <p>@ViewBag.Error</p>
+                                </div>
+                            }
+                            <div class="form-group mb-4">
+                                <label>ایمیل</label>
+                                <input name="UserName" type="text" class="form-control border-light input-h-42" placeholder="ایمیل">
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb-4">
+                                <label>کلمه عبور</label>
+                                <div class="input-group border border-light">
+                                    <input name="UserPassword" id="password-field" type="password" class="form-control input-h-42" placeholder="کلمه عبور" aria-label="Password">
+                                    <div class="input-group-prepend">
+                                        <span toggle="#password-field" class="input-group-text la la-eye" id="Password"></span>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="checkbox mr-4 mb-3 mb-md-0 m-4">
+                                <input name="Remember" type="checkbox" id="Remember-field">
+                                <label for="Remember-field"> مرا به خاطرت نگه دار</label>
+                            </div>
+                            <hr/>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                @* <a href="forgot.html" class="text-primary btn-link">Forgot password?</a> *@
+                                <button type="submit" class="btn btn-primary waves-effect waves-primary btn-md w-50">ورود</button>
+                            </div> @* <a href="register.html" class="btn btn-outline-primary waves-effect waves-primary w-100 btn-md"> *@@*     Create an *@@*     account *@@* </a> *@
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

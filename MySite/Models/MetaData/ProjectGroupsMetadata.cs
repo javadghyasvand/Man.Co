@@ -8,13 +8,12 @@ namespace MySite.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "عنوان گروه")]
-        [MaxLength(250)]
+        [MaxLength(250, ErrorMessage = "تعداد کاراکتر مجاز250 می باشد")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         public string GroupName { get; set; }
         [Display(Name = "تصویر گروه")]
         public string GroupImage { get; set; }
-        [Display(Name = "توضیحات گروه" +
-                        "")]
+        [Display(Name = "توضیحات گروه")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]

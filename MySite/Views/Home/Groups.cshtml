@@ -4,7 +4,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12 col-12 text-center mb-4 pb-lg-2">
-                <em class="text-white">man.com</em>
                 <h2 class="text-white">زمینه کاری ما</h2>
             </div>
             @if (Model != null)
@@ -12,7 +11,7 @@
                 foreach (var item in Model)
                 {
                     <div class="col-lg-3 col-md-6 col-12 mb-4">
-                        <div class="team-block-wrap">
+                        <a href="/Archive?selectGroup=@item.Id&pageId=1" class="team-block-wrap">
                             <div class="team-block-info">
                                 <div class=" mb-3">
                                      <h2 style="" class="text-white mb-0 titleGroup">@item.GroupName</h2> 
@@ -22,7 +21,7 @@
                             <div class="team-block-image-wrap">
                                 <img src="~/images/ImageGroups/@item.GroupImage" class="team-block-image img-fluid" alt="@item.GroupName">
                             </div>
-                        </div>
+                        </a>
                     </div>
                 }
             }

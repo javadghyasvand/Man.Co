@@ -33,6 +33,13 @@
       <End Role="Project" EntitySet="Project" />
       <End Role="Seo" EntitySet="Seo" />
     </AssociationSet>
+    <EntitySet Name="Contact" EntityType="MySiteDataModel.Contact" />
+    <EntitySet Name="Roles" EntityType="MySiteDataModel.Roles" />
+    <EntitySet Name="Users" EntityType="MySiteDataModel.Users" />
+    <AssociationSet Name="FK_Users_Roles" Association="MySiteDataModel.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Gallery">
     <Key>
@@ -60,7 +67,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TitleProject" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
-    <Property Name="LinkProject" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="LinkProject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ImageProject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="DescriptionProject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="VideoProject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -136,6 +143,52 @@
       </Principal>
       <Dependent Role="Seo">
         <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="850" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="850" FixedLength="false" Unicode="true" />
+    <Property Name="MesageDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsCall" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RolesId" />
+    </Key>
+    <Property Name="RolesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="MySiteDataModel.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="UserPhone" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserImage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Roles" Relationship="MySiteDataModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+    <Property Name="UserActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Users_Roles">
+    <End Type="MySiteDataModel.Roles" Role="Roles" Multiplicity="1" />
+    <End Type="MySiteDataModel.Users" Role="Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RolesId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

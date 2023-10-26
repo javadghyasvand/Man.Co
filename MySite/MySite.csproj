@@ -130,24 +130,36 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AboutController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectGroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectsController.cs" />
     <Content Include="Content\AdminAssets\assets\scripts\jquery.mousewheel.min.js" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Data\MySiteContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\MetaData\AboutMetadata.cs" />
+    <Compile Include="Models\MetaData\ContactMetadata.cs" />
     <Compile Include="Models\MetaData\GalleryMetadata.cs" />
     <Compile Include="Models\MetaData\ProjectGroupsMetadata.cs" />
     <Compile Include="Models\MetaData\ProjectMetadata.cs" />
+    <Compile Include="Models\MetaData\RolesMetadata.cs" />
     <Compile Include="Models\MetaData\SelectProjectGroupMetadata.cs" />
     <Compile Include="Models\MetaData\SeoMetadata.cs" />
+    <Compile Include="Models\MetaData\UsersMetadata.cs" />
     <Compile Include="Models\Model\About.cs">
+      <DependentUpon>MySite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model\Contact.cs">
       <DependentUpon>MySite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model\Gallery.cs">
@@ -174,12 +186,20 @@
     <Compile Include="Models\Model\ProjectGroups.cs">
       <DependentUpon>MySite.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model\Roles.cs">
+      <DependentUpon>MySite.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model\SelectProjectGroup.cs">
       <DependentUpon>MySite.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model\Seo.cs">
       <DependentUpon>MySite.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model\Users.cs">
+      <DependentUpon>MySite.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\ProjectViewModel.cs" />
     <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -802,29 +822,12 @@
     <Content Include="Content\Kendo UI v2014.1.318 - ShamsiDatePicker\kendo.common.min.css" />
     <Content Include="Content\Kendo UI v2014.1.318 - ShamsiDatePicker\kendo.default.min.css" />
     <Content Include="Content\Kendo UI v2014.1.318 - ShamsiDatePicker\kendo.web.js" />
+    <Content Include="Content\toast\css\jquery.toast.css" />
+    <Content Include="Content\toast\js\jquery.toast.js" />
     <Content Include="Content\UlAssets\css\bootstrap-icons.css" />
     <Content Include="Content\UlAssets\css\bootstrap.min.css" />
     <Content Include="Content\UlAssets\css\tooplate-barista.css" />
     <Content Include="Content\UlAssets\css\vegas.min.css" />
-    <Content Include="Content\UlAssets\images\1.jpg" />
-    <Content Include="Content\UlAssets\images\2.jpg" />
-    <Content Include="Content\UlAssets\images\3.jpg" />
-    <Content Include="Content\UlAssets\images\4.jpg" />
-    <Content Include="Content\UlAssets\images\barman-with-fruits.jpg" />
-    <Content Include="Content\UlAssets\images\coffee-beans.png" />
-    <Content Include="Content\UlAssets\images\happy-loving-couple-bakers-drinking-coffee-looking-notebook.jpg" />
-    <Content Include="Content\UlAssets\images\happy-waitress-giving-coffee-customers-while-serving-them-coffee-shop.jpg" />
-    <Content Include="Content\UlAssets\images\mid-section-waitress-wiping-espresso-machine-with-napkin-cafa-c - Copy.jpg" />
-    <Content Include="Content\UlAssets\images\mid-section-waitress-wiping-espresso-machine-with-napkin-cafa-c.jpg" />
-    <Content Include="Content\UlAssets\images\reviews\senior-man-white-sweater-eyeglasses.jpg" />
-    <Content Include="Content\UlAssets\images\reviews\young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg" />
-    <Content Include="Content\UlAssets\images\reviews\young-woman-with-round-glasses-yellow-sweater.jpg" />
-    <Content Include="Content\UlAssets\images\sincere-laugh-showing-picture-smartphone-casual-meeting-with-best-friends-restaurant-terrace.jpg" />
-    <Content Include="Content\UlAssets\images\team\cute-korean-barista-girl-pouring-coffee-prepare-filter-batch-brew-pour-working-cafe.jpg" />
-    <Content Include="Content\UlAssets\images\team\portrait-elegant-old-man-wearing-suit.jpg" />
-    <Content Include="Content\UlAssets\images\team\small-business-owner-drinking-coffee.jpg" />
-    <Content Include="Content\UlAssets\images\team\smiley-business-woman-working-cashier.jpg" />
-    <Content Include="Content\UlAssets\images\young-female-barista-wear-face-mask-serving-take-away-hot-coffee-paper-cup-consumer-cafe.jpg" />
     <Content Include="Content\UlAssets\js\bootstrap.min.js" />
     <Content Include="Content\UlAssets\js\click-scroll.js" />
     <Content Include="Content\UlAssets\js\custom.js" />
@@ -839,7 +842,6 @@
     <Content Include="Content\UlAssets\js\jquery.min.js" />
     <Content Include="Content\UlAssets\js\jquery.sticky.js" />
     <Content Include="Content\UlAssets\js\vegas.min.js" />
-    <Content Include="Content\UlAssets\videos\pexels-mike-jones-9046237.mp4" />
     <Content Include="Content\Vazir\vazir\AUTHORS.txt" />
     <Content Include="Content\Vazir\vazir\misc\Farsi-Digits-Non-Latin\Vazirmatn-FD-NL-font-face.css" />
     <Content Include="Content\Vazir\vazir\misc\Farsi-Digits\Vazirmatn-FD-font-face.css" />
@@ -864,12 +866,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\1.jpg" />
-    <Content Include="images\2.jpg" />
-    <Content Include="images\3.jpg" />
-    <Content Include="images\4.jpg" />
+    <Content Include="images\ImageSite\1.jpg" />
+    <Content Include="images\ImageSite\2.jpg" />
+    <Content Include="images\ImageSite\3.jpg" />
+    <Content Include="images\ImageSite\4.jpg" />
     <Content Include="images\ImageSite\img3.jpg" />
+    <Content Include="images\ImageSite\login-mockup.svg" />
     <Content Include="images\ImageSite\logo.png" />
+    <Content Include="images\ImageSite\logo.ico" />
+    <Content Include="images\ImageUser\logo.png" />
+    <Content Include="images\ImageUser\no-photo.jpg" />
+    <Content Include="logo.ico" />
     <Content Include="Models\Model\MySite.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MySite.edmx</DependentUpon>
@@ -1545,11 +1552,29 @@
     <Content Include="Areas\Admin\Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Header.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\LeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\web.config" />
+    <Content Include="Areas\Account\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Account\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Account\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Setting.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1570,17 +1595,24 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
-    <Content Include="Views\Shared\Welcome.cshtml" />
+    <Content Include="Views\Home\Welcome.cshtml" />
     <Content Include="Views\Home\Groups.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Portfolio.cshtml" />
+    <Content Include="Views\Project\Project.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Message\Message.cshtml" />
+    <Content Include="Views\Project\ArchiveProject.cshtml" />
+    <None Include="Views\Shared\NavbarOther.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Account\Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="images\ImageGroups\" />
     <Folder Include="images\ImageProject\" />
     <Folder Include="images\VideoProject\" />
+    <Folder Include="Views\Acount\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1601,6 +1633,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

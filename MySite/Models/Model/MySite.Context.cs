@@ -31,5 +31,8 @@ namespace MySite.Models.Model
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<ProjectGroups> ProjectGroups { get; set; }
         public virtual DbSet<Seo> Seo { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

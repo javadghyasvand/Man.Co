@@ -1,0 +1,122 @@
+﻿@using MySite.Models.Model
+@model MySite.Models.ViewModel.ProjectViewModel
+
+@{
+    ViewBag.Title = Model.TitleProject;
+    List<Gallery> gallery = ViewBag.gallery;
+    List<string> Tags = new List<string>(Model.Tag.Split(new string[] { "#" }, StringSplitOptions.None));
+    ViewBag.Discription = Model.MetaDescription;
+}
+<section class="booking-section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="booking-form-wrap pb-5">
+                <div class="row">
+                    <div>
+                        <h1 class="text-light text-center pt-5">@Model.TitleProject</h1>
+                        <hr class="flair">
+                        <div class="mt-2 pb-3">
+                            <div class="text-center">
+                                <img style="width: 500px" class="img-thumbnail m-1 float-left" src="~/images/ImageProject/@Model.ImageProject" alt="@Model.TitleProject">
+                            </div>
+                            <div>
+                                @Html.Raw(Model.DescriptionProject)
+                                @if (!string.IsNullOrEmpty(Model.LinkProject))
+                                {
+                                    <p class="mt-4 d-md-block" style="text-align: end;">
+                                        <a class="btn custom-btn custom-border-btn" href="@Model.LinkProject" target="_blank">
+                                            برای دیدن پروژه اینجا کلیک کنید
+                                        </a>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                        @if (Model.VideoProject != null)
+                        {
+                            if (Model.VideoProject == "Default.mp4")
+                            {
+                               
+                                    
+                               
+                              
+                                <div class="text-center">
+                                    <video style="width: 75%" autoplay="" loop="" muted="" class="custom-video" poster="">
+                                        <source src="~/images/VideoProject/@Model.VideoProject" type="video/mp4">
+                                    </video>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="text-center">
+                                    <video controls muted style="width: 75%">
+                                        <source src="~/images/VideoProject/@Model.VideoProject" type="video/mp4">
+                                    </video>
+                                </div>
+                            }
+                        }
+                        <div class="m-5 text-center">
+                            @foreach (var item in Tags)
+                            {
+                                <a class="btn custom-btn custom-border-btn">@item</a>
+                            }
+                        </div>
+                        <hr class="flair">
+                        <p class="text-center">گالری تصاویر</p>
+                        <hr class="flair">
+                        @if (gallery.Count() < 0)
+                        {
+                            foreach (var item in gallery)
+                            {
+                                <div class="box">
+                                    <img class="img-thumbnail img m-1 w-50" src="~/images/ImageProject/@item.ImageName" alt="@item.ImageTitle">
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center m-5">
+                                <P class="alert alert-warning">در حال حاضر تصویر بار گذاری نشده است</P>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .box {
+        text-align: center !important;
+        display: block;
+        background: transparent;
+        opacity: 0;
+        transform: translateY(200px);
+        transition: all 1s ease-in-out 1s;
+    }
+
+    .animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+@section scripts
+{
+    <script>
+        function reveal(item, wrapper) {
+            var verticalEdge = wrapper.scrollTop() + wrapper.outerHeight(),
+                horizontalEdge = wrapper.scrollLeft() + wrapper.outerWidth();
+
+            item.each(function () {
+                if ((verticalEdge >= $(this).offset().top) &&
+                    (horizontalEdge >= $(this).offset().left)) {
+                    $(this).addClass('animate');
+                }
+            });
+        }
+
+        $(window).on("load scroll", function () {
+            reveal($('.box'), $(this));
+        });
+    </script>
+}

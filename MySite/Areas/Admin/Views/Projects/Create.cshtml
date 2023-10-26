@@ -35,89 +35,63 @@
                     @Html.EditorFor(model => model.Tag, new { htmlAttributes = new { @class = "form-control  bg-light  border-light", placeholder = "کلمات کلیدی را با # جدا کنید" } })
                     @Html.ValidationMessageFor(model => model.Tag, "", new { @class = "text-danger" })
                 </div>
-                <div id="accordionOne" class="mt-4">
-                    <div class="card border-primary mb-3">
-                        <div id="headingOne" class="card-header p-0 border-0">
-                            <h4 class="mb-0">
-                                <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="text-center btn btn-light d-block text-left">
-                                    انتخاب عکس
-                                    انتخاب ویدیو
-                                    <i class="la la-caret-square-o-down ml-5 float-left"></i>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionOne" class="collapse show">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div>
-                                        <div class="mb-3">
-                                            <input type="file" name="imageUpload" id="ImageFile" class=" bg-light"/>
-                                        </div>
-                                        <div>
-                                            <img id="imageShow" style="width: 50%;">
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.ImageProject, "", new { @class = "text-danger" })
+                
+                <p>
+                    <button class="btn btn-light btn-block" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        انتخاب عکس
+                        <i class="la la-caret-square-o-down ml-5 float-left"></i>
+                    </button>
+                </p>
+                <div class="collapse show" id="collapse3">
+                    <div class="card card-body">
+                        <div class="form-group">
+                            <div>
+                                <div class="mb-3">
+                                    <input type="file" name="imageUpload" id="ImageFile" class=" bg-light"/>
                                 </div>
+                                <div>
+                                    <img id="imageShow" style="width: 50%;">
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
+                            @Html.ValidationMessageFor(model => model.ImageProject, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
-                <div id="accordionTow" class="mt-4">
-                    <div class="card border-primary mb-3">
-                        <div id="headingTow" class="card-header p-0 border-0">
-                            <h4 class="mb-0">
-                                <a href="#" data-toggle="collapse" data-target="#collapseTow" aria-expanded="true" aria-controls="collapseTow" class="text-center text-dark btn btn-light d-block text-left  ">
-
-                                    <i class="la la-caret-square-o-down ml-5 float-left"></i>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTow" aria-labelledby="headingTow" data-parent="#accordionTow" class="collapse show">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div>
-                                        <div class="mb-3">
-                                            <input type="file" name="videoUpload" id="FileUpload" class=" bg-light"/>
-                                        </div>
-                                        <div>
-                                            <video autoplay controls muted style="width: 50%; height: 500px">
-                                                <source id="FileShow" type="video/mp4">
-                                            </video>
-                                        </div>
-                                        <div class="clearfix"></div>
+                <p>
+                    <button class="btn btn-light btn-block" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        انتخاب ویدیو
+                        <i class="la la-caret-square-o-down ml-5 float-left"></i>
+                    </button>
+                </p>
+                <div class="collapse show" id="collapse2">
+                    <div class="card card-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div>
+                                    <div class="mb-3">
+                                        <input type="file" name="videoUpload" id="FileUpload" class=" bg-light"/>
                                     </div>
-                                    @Html.ValidationMessageFor(model => model.VideoProject, "", new { @class = "text-danger" })
+                                    <div>
+                                        <video autoplay controls muted style="width: 50%; height: 500px">
+                                            <source id="FileShow" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <div class="clearfix"></div>
                                 </div>
+                                @Html.ValidationMessageFor(model => model.VideoProject, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="accordionThree" class="mt-4">
-                    <div class="card border-primary mb-3">
-                        <div id="headingThree" class="card-header p-0 border-0">
-                            <h4 class="mb-0">
-                                <a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" class="text-center text-dark btn btn-light d-block text-left">
-                                    توضیحات
-                                    <i class="la la-caret-square-o-down ml-5 float-left"></i>
-                                </a>
-
-                            </h4>
-                        </div>
-                        <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionThree" class="collapse show">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <div>
-                                        @Html.EditorFor(model => model.DescriptionProject, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.DescriptionProject, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>   
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionProject, htmlAttributes: new { @class = "control-label  text-dark" })
+                    <hr/>
+                    <div>
+                        @Html.EditorFor(model => model.DescriptionProject, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionProject, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label  text-dark">انتخاب گروه</label>
                     <hr/>
@@ -134,7 +108,6 @@
                                 </li>
                             }
                         </ul>
-                        p
                     </div>
                 </div>
                 <hr/>

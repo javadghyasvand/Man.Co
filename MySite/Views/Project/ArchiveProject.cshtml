@@ -1,0 +1,148 @@
+﻿@using MySite.Models.Model
+@model IEnumerable<Project> 
+
+@{
+    ViewBag.Title = "آرشیو محصولات";
+    List<ProjectGroups> groupsList = ViewBag.groups;
+    foreach(var gr in groupsList)
+    {
+        ViewBag.Discription = string.Join(",", gr);
+    }
+}
+<section class="booking-section section-padding" dir="rtl">
+    <div class="container">
+        <div class="row">
+            <div class="booking-form-wrap pb-5">
+                <div class="row">
+                    <div>
+                        <h1 class="text-light text-center pt-5">آرشیو محصولات</h1>
+                        <hr class="flair">
+                    </div>
+                    <div class="booking-form-image-wrap">
+                        <form class="custom-form booking-form p-3 text-center" action="/Archive" id="filterform">
+                            <input type="hidden" value="@ViewBag.select" id="selectGroup" name="selectGroup"/>
+                            <input type="hidden" value="@ViewBag.pageId" id="pageId" name="pageId"/>
+                            <a href="/Archive?selectGroup=Null&pageId=1" class="btn custom-btn me-2 mb-2" style="font-size: 10px; padding: 7px">
+                                <strong>
+                                    همه پروژه ها
+                                </strong>
+                            </a>
+                            @foreach (var item in groupsList)
+                            {
+                                <button onclick="SortArchive(@item.Id)" class="btn custom-btn me-2 mb-2" style="font-size: 10px; padding: 7px">
+                                    <strong>
+                                        @item.GroupName
+                                    </strong>
+                                </button>
+                            }
+                        </form>
+                    </div>
+                    <hr/>
+                    @if (ViewBag.select != null)
+                    {
+                        foreach (var item in groupsList.Where(g => g.Id == ViewBag.select))
+                        {
+                            <div class="m-auto w-100">
+
+                                <a class="btn btn-block w-75 custom-btn-description m-4" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    @item.GroupName
+                                    <i class="bi bi-caret-down-fill"></i>
+                                </a>
+                                <div class="collapse bg-transparent" id="collapseExample">
+                                    <div class="card card-body  bg-transparent">
+                                        @Html.Raw(item.GroupDescription)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center m-auto w-100">
+
+                            <a class="btn btn-block w-75 custom-btn-description m-4" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                مان ارتباط
+                                <i class="bi bi-caret-down-fill"></i>
+                            </a>
+                            <div class="collapse bg-transparent" id="collapseExample">
+                                <div class="card card-body  bg-transparent">
+                                    <span>
+                                        <h2 class="text-light" style="font-size:20px">
+                                            تولید محتوا
+                                        </h2>
+                                        <p  style="color: #ffffff; font-size: 15px; font-weight: var(--font-weight-light);">
+                                            تولید محتوا یعنی خلق هرچیز قابل درک برای افراد جامعه، به طور دقیق ترتولید محتوا یعنی نوشتن، طراحی، ضبط یا ساخت هرچیزی که انسان‌ها می‌توانند درکش کنند و در بستر های مختلف منتشر می‌کنیم تا به اهدافی مثل کسب درآمد، رسانه‌سازی و ... برسیم.
+                                            با تولید محتوا اطلاعات ارزشمندی را به طور رایگان در اختیار مخاطبین قرار داده و از این طریق مشتریان جدیدی را برای کسب و کارخود ایجاد می‌نمایید. همچنین با تولید محتوا مشتریان قبلی شما نیز به برندتان وفادارتر خواهند شد.
+
+                                        </p>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <a class="team-block-wrap" href="/Project/Project/@item.Id">
+                                    <div class="team-block-info">
+                                        <div class=" mb-3">
+                                            <h2 style="" class="text-white mb-0 titleGroup">@item.TitleProject </h2>
+                                        </div>
+                                    </div>
+                                    <div class="team-block-image-wrap">
+                                        <img src="/images/ImageProject/@item.ImageProject" class="team-block-image img-fluid" alt="@item.TitleProject">
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+
+                    @if (ViewBag.pagecount > 1)
+                    {
+                        <hr/>
+
+                        <div class="pages text-center" dir="ltr">
+                            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a onclick="ChangPage(1)" aria-label="Next" class="page-link">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    @for (int i = 1; i <= ViewBag.pagecount; i++)
+                                    {
+                                        <li class="page-item @((i == ViewBag.pageId) ? "active" : "")">
+                                            <a onclick="ChangPage(@i)" class="page-link">@i</a>
+                                        </li>
+                                    }
+                                    <li class="page-item">
+                                        <a onclick="ChangPage(@ViewBag.pagecount)" aria-label="Next" class="page-link">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        function ChangPage(PgId) {
+            $("#pageId").val(PgId);
+            $("#filterform").trigger("submit");
+        }
+        function SortArchive(select) {
+            $("#selectGroup").val(select);
+            $("#filterform").trigger("submit");
+        }
+    </script>
+}

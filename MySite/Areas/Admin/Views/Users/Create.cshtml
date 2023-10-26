@@ -1,0 +1,118 @@
+﻿@using Roles = MySite.Models.Model.Roles
+@model MySite.Models.Model.Users
+
+@{
+    ViewBag.Title = "افزودن کاربر جدید";
+    List<Roles> roles = ViewBag.Roles;
+}
+<div class="text-center m-3" dir="rtl">
+    @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <label class="control-label font-weight-bold  text-dark">
+                دسترسی
+            </label>
+            <hr/>
+            <div class=" form-group bg-light p-2 ">
+
+
+                @foreach (var item in roles)
+                {
+                    <span class="radio mr-4 mb-3 mb-md-0 p-2">
+                        <input value="@item.RolesId" type="radio" id="radio-@item.RolesId" name="RolseSelect">
+                        <label class="text-dark" for="radio-@item.RolesId">@item.RoleTitle</label>
+                    </span>
+                }
+            </div>
+
+            <div class="form-group ">
+                @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label  text-dark" })
+                <hr/>
+                @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control  bg-light  border-light" } })
+                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label  text-dark" })
+                <hr/>
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control  bg-light  border-light" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group mb-4">
+                <label class = "control-label  text-dark" >کلمه عبور</label>
+                <div class="input-group border border-light">
+                    <input name="UserPassword" id="password-field" type="password" class="form-control input-h-42 bg-light" placeholder="کلمه عبور" aria-label="Password">
+                    <div class="input-group-prepend">
+                        <span toggle="#password-field" class="input-group-text la la-eye" id="Password"></span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserPhone, htmlAttributes: new { @class = "control-label  text-dark" })
+                <hr/>
+                @Html.EditorFor(model => model.UserPhone, new { htmlAttributes = new { @class = "form-control  bg-light  border-light" } })
+                @Html.ValidationMessageFor(model => model.UserPhone, "", new { @class = "text-danger" })
+            </div>
+            <p>
+                <button class="btn btn-light btn-block" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                    انتخاب تصویر
+                    <i class="la la-caret-square-o-down ml-5 float-left"></i>
+
+                </button>
+            </p>
+            <div class="collapse show" id="collapse1">
+                <div class="card card-body">
+                    <div class="form-group">
+                        <div>
+                            <div class="mb-3">
+                                <input type="file" name="imageFile" id="ImageFile" class="bg-light"/>
+                            </div>
+                            <div>
+                                <img id="imageShow" style="width: 50%; height: auto;">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.UserImage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-outline-success waves-effect waves-green">ذخیره</button>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-danger waves-effect waves-green">بازگشت</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script>
+        $('document').ready(function () {
+            $("#ImageFile").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imageShow').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    input[type="file"]::file-selector-button {
+        border: 2px solid #2863EC;
+        padding: 0.2em 0.4em;
+        border-radius: 0.2em;
+        background-color: #2863EC;
+        transition: 1s;
+        color: #ffff
+    }
+</style>

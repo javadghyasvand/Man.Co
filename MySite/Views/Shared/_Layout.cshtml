@@ -4,337 +4,57 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="@ViewBag.Discription">
     <meta name="author" content="">
-    <title>Barista Cafe HTML CSS Template</title>
-
-    <!-- CSS FILES -->
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="~/images/ImageSite/logo.ico" type="image/gif" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,400;0,600;0,700;1,200;1,700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,400;0,600;0,700;1,200;1,700&display=swap"
-          rel="stylesheet">
-
-    <link href="~/Content/UlAssets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/UlAssets/css/bootstrap-icons.css" rel="stylesheet">
-    <link href="~/Content/UlAssets/css/vegas.min.css" rel="stylesheet">
-    <link href="~/Content/UlAssets/css/tooplate-barista.css" rel="stylesheet">
+    @Styles.Render("~/Content/UlAssets/css/bootstrap.min.css")
+    @Styles.Render("~/Content/UlAssets/css/bootstrap-icons.css")
+    @Styles.Render("~/Content/UlAssets/css/vegas.min.css")
+    @Styles.Render("~/Content/UlAssets/css/tooplate-barista.css")
+    @Styles.Render("~/Content/toast/css/jquery.toast.css")
 </head>
 
 <body>
 
-    <main>
-
+<main>
+    @if (ViewBag.Page == "indexPage")
+    {
         @Html.Partial("Navbar")
-        @Html.Partial("Welcome")
-        @Html.Action("About", "Home")
-        @Html.Action("Groups", "Home")
-        @Html.Action("Portfolio", "Home")
-        @Html.Action("Blog", "Home")
-
-
-        @RenderBody()
-        @* <section class="barista-section section-padding section-bg" id="barista-team"> *@
-        @*     <div class="container"> *@
-        @*         <div class="row justify-content-center"> *@
-        @* *@
-        @*             <div class="col-lg-12 col-12 text-center mb-4 pb-lg-2"> *@
-        @*                 <em class="text-white">Creative Baristas</em> *@
-        @* *@
-        @*                 <h2 class="text-white">Meet People</h2> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-3 col-md-6 col-12 mb-4"> *@
-        @*                 <div class="team-block-wrap"> *@
-        @*                     <div class="team-block-info d-flex flex-column"> *@
-        @*                         <div class="d-flex mt-auto mb-3"> *@
-        @*                             <h4 class="text-white mb-0">Steve</h4> *@
-        @* *@
-        @*                             <p class="badge ms-4"> *@
-        @*                                 <em>Boss</em> *@
-        @*                             </p> *@
-        @*                         </div> *@
-        @* *@
-        @*                         <p class="text-white mb-0">your favourite coffee daily lives tempor.</p> *@
-        @*                     </div> *@
-        @* *@
-        @*                     <div class="team-block-image-wrap"> *@
-        @*                         <img src="~/Content/UlAssets/images/team/portrait-elegant-old-man-wearing-suit.jpg" *@
-        @*                              class="team-block-image img-fluid" alt=""> *@
-        @*                     </div> *@
-        @*                 </div> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-3 col-md-6 col-12 mb-4"> *@
-        @*                 <div class="team-block-wrap"> *@
-        @*                     <div class="team-block-info d-flex flex-column"> *@
-        @*                         <div class="d-flex mt-auto mb-3"> *@
-        @*                             <h4 class="text-white mb-0">Sandra</h4> *@
-        @* *@
-        @*                             <p class="badge ms-4"> *@
-        @*                                 <em>Manager</em> *@
-        @*                             </p> *@
-        @*                         </div> *@
-        @* *@
-        @*                         <p class="text-white mb-0">your favourite coffee daily lives.</p> *@
-        @*                     </div> *@
-        @* *@
-        @*                     <div class="team-block-image-wrap"> *@
-        @*                         <img src="~/Content/UlAssets/images/team/cute-korean-barista-girl-pouring-coffee-prepare-filter-batch-brew-pour-working-cafe.jpg" *@
-        @*                              class="team-block-image img-fluid" alt=""> *@
-        @*                     </div> *@
-        @*                 </div> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-3 col-md-6 col-12 mb-4"> *@
-        @*                 <div class="team-block-wrap"> *@
-        @*                     <div class="team-block-info d-flex flex-column"> *@
-        @*                         <div class="d-flex mt-auto mb-3"> *@
-        @*                             <h4 class="text-white mb-0">Jackson</h4> *@
-        @* *@
-        @*                             <p class="badge ms-4"> *@
-        @*                                 <em>Senior</em> *@
-        @*                             </p> *@
-        @*                         </div> *@
-        @* *@
-        @*                         <p class="text-white mb-0">your favourite coffee daily lives.</p> *@
-        @*                     </div> *@
-        @* *@
-        @*                     <div class="team-block-image-wrap"> *@
-        @*                         <img src="~/Content/UlAssets/images/team/small-business-owner-drinking-coffee.jpg" *@
-        @*                              class="team-block-image img-fluid" alt=""> *@
-        @*                     </div> *@
-        @*                 </div> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-3 col-md-6 col-12"> *@
-        @*                 <div class="team-block-wrap"> *@
-        @*                     <div class="team-block-info d-flex flex-column"> *@
-        @*                         <div class="d-flex mt-auto mb-3"> *@
-        @*                             <h4 class="text-white mb-0">Michelle</h4> *@
-        @* *@
-        @*                             <p class="badge ms-4"> *@
-        @*                                 <em>Barista</em> *@
-        @*                             </p> *@
-        @*                         </div> *@
-        @* *@
-        @*                         <p class="text-white mb-0">your favourite coffee daily consectetur.</p> *@
-        @*                     </div> *@
-        @* *@
-        @*                     <div class="team-block-image-wrap"> *@
-        @*                         <img src="~/Content/UlAssets/images/team/smiley-business-woman-working-cashier.jpg" *@
-        @*                              class="team-block-image img-fluid" alt=""> *@
-        @*                     </div> *@
-        @*                 </div> *@
-        @*             </div> *@
-        @* *@
-        @*         </div> *@
-        @*     </div> *@
-        @* </section> *@
-        @* *@
-        @* *@
-        @* *@
-        @* *@
-        @* *@
-        @* <section class="contact-section section-padding" id="section_5"> *@
-        @*     <div class="container"> *@
-        @*         <div class="row"> *@
-        @* *@
-        @*             <div class="col-lg-12 col-12"> *@
-        @*                 <em class="text-white">Say Hello</em> *@
-        @*                 <h2 class="text-white mb-4 pb-lg-2">Contact</h2> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-6 col-12"> *@
-        @*                 <form action="#" method="post" class="custom-form contact-form" role="form"> *@
-        @* *@
-        @*                     <div class="row"> *@
-        @* *@
-        @*                         <div class="col-lg-6 col-12"> *@
-        @*                             <label for="name" class="form-label">Name <sup class="text-danger">*</sup></label> *@
-        @* *@
-        @*                             <input type="text" name="name" id="name" class="form-control" placeholder="Jackson" *@
-        @*                                    required=""> *@
-        @*                         </div> *@
-        @* *@
-        @*                         <div class="col-lg-6 col-12"> *@
-        @*                             <label for="email" class="form-label">Email Address</label> *@
-        @* *@
-        @*                             <input type="email" name="email" id="email" *@
-        @*                                    class="form-control" placeholder="Jack@gmail.com" required=""> *@
-        @*                         </div> *@
-        @* *@
-        @*                         <div class="col-12"> *@
-        @*                             <label for="message" class="form-label">How can we help?</label> *@
-        @* *@
-        @*                             <textarea name="message" rows="4" class="form-control" id="message" *@
-        @*                                       placeholder="Message" required=""></textarea> *@
-        @* *@
-        @*                         </div> *@
-        @*                     </div> *@
-        @* *@
-        @*                     <div class="col-lg-5 col-12 mx-auto mt-3"> *@
-        @*                         <button type="submit" class="form-control">Send Message</button> *@
-        @*                     </div> *@
-        @*                 </form> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-6 col-12 mx-auto mt-5 mt-lg-0 ps-lg-5"> *@
-        @*                 <iframe class="google-map" *@
-        @*                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5039.668141741662!2d72.81814769288509!3d19.043340656729775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c994f34a7355%3A0x2680d63a6f7e33c2!2sLover%20Point!5e1!3m2!1sen!2sth!4v1692722771770!5m2!1sen!2sth" *@
-        @*                         width="100%" height="300" style="border: 0;" allowfullscreen="" loading="lazy" *@
-        @*                         referrerpolicy="no-referrer-when-downgrade"> *@
-        @*                 </iframe> *@
-        @*             </div> *@
-        @* *@
-        @*         </div> *@
-        @*     </div> *@
-        @* </section> *@
-        @* *@
-        @* *@
-        @* <footer class="site-footer"> *@
-        @*     <div class="container"> *@
-        @*         <div class="row"> *@
-        @* *@
-        @*             <div class="col-lg-4 col-12 me-auto"> *@
-        @*                 <em class="text-white d-block mb-4">Where to find us?</em> *@
-        @* *@
-        @*                 <strong class="text-white"> *@
-        @*                     <i class="bi-geo-alt me-2"></i> *@
-        @*                     Bandra West, Mumbai, Maharashtra 400050, India *@
-        @*                 </strong> *@
-        @* *@
-        @*                 <ul class="social-icon mt-4"> *@
-        @*                     <li class="social-icon-item"> *@
-        @*                         <a href="#" class="social-icon-link bi-facebook"> *@
-        @*                         </a> *@
-        @*                     </li> *@
-        @* *@
-        @*                     <li class="social-icon-item"> *@
-        @*                         <a href="https://x.com/minthu" target="_new" class="social-icon-link bi-twitter"> *@
-        @*                         </a> *@
-        @*                     </li> *@
-        @* *@
-        @*                     <li class="social-icon-item"> *@
-        @*                         <a href="#" class="social-icon-link bi-whatsapp"> *@
-        @*                         </a> *@
-        @*                     </li> *@
-        @*                 </ul> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-3 col-12 mt-4 mb-3 mt-lg-0 mb-lg-0"> *@
-        @*                 <em class="text-white d-block mb-4">Contact</em> *@
-        @* *@
-        @*                 <p class="d-flex mb-1"> *@
-        @*                     <strong class="me-2">Phone:</strong> *@
-        @*                     <a href="tel: 305-240-9671" class="site-footer-link"> *@
-        @*                         (65) *@
-        @*                         305 2409 671 *@
-        @*                     </a> *@
-        @*                 </p> *@
-        @* *@
-        @*                 <p class="d-flex"> *@
-        @*                     <strong class="me-2">Email:</strong> *@
-        @* *@
-        @*                     <a href="mailto:info@yourgmail.com" class="site-footer-link"> *@
-        @*                         hello@barista.co *@
-        @*                     </a> *@
-        @*                 </p> *@
-        @*             </div> *@
-        @* *@
-        @* *@
-        @*             <div class="col-lg-5 col-12"> *@
-        @*                 <em class="text-white d-block mb-4">Opening Hours.</em> *@
-        @* *@
-        @*                 <ul class="opening-hours-list"> *@
-        @*                     <li class="d-flex"> *@
-        @*                         Monday - Friday *@
-        @*                         <span class="underline"></span> *@
-        @* *@
-        @*                         <strong>9:00 - 18:00</strong> *@
-        @*                     </li> *@
-        @* *@
-        @*                     <li class="d-flex"> *@
-        @*                         Saturday *@
-        @*                         <span class="underline"></span> *@
-        @* *@
-        @*                         <strong>11:00 - 16:30</strong> *@
-        @*                     </li> *@
-        @* *@
-        @*                     <li class="d-flex"> *@
-        @*                         Sunday *@
-        @*                         <span class="underline"></span> *@
-        @* *@
-        @*                         <strong>Closed</strong> *@
-        @*                     </li> *@
-        @*                 </ul> *@
-        @*             </div> *@
-        @* *@
-        @*             <div class="col-lg-8 col-12 mt-4"> *@
-        @*                 <p class="copyright-text mb-0"> *@
-        @*                     Copyright © Barista Cafe 2048 *@
-        @*                     - Design: <a rel="sponsored" href="https://www.tooplate.com" target="_blank">Tooplate</a> *@
-        @*                 </p> *@
-        @*             </div> *@
-        @*         </div> *@
-        @*     </div> *@
-        @* </footer> *@
-    </main>
+    }
+    else
+    {
+        @Html.Partial("NavbarOther")
+    }
+    @RenderSection("Welcome", false)
+    @RenderSection("About", false)
+    @RenderSection("Groups", false)
+    @RenderSection("Portfolio", false)
+    @RenderSection("Blog", false)
+    @RenderBody()
+    @RenderSection("Contact", false)
+    @Html.Partial("Footer")
+</main>
 <!-- JAVASCRIPT FILES -->
-<script src="~/Content/UlAssets/js/jquery.min.js"></script>
-<script src="~/Content/UlAssets/js/bootstrap.min.js"></script>
-<script src="~/Content/UlAssets/js/jquery.sticky.js"></script>
-<script src="~/Content/UlAssets/js/click-scroll.js"></script>
-<script src="~/Content/UlAssets/js/vegas.min.js"></script>
-<script src="~/Content/UlAssets/js/custom.js"></script>
+
+@Scripts.Render("~/Scripts/jquery-3.4.1.min.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+@Scripts.Render("~/Content/UlAssets/js/bootstrap.min.js")
+@Scripts.Render("~/Content/UlAssets/js/jquery.sticky.js")
+@Scripts.Render("~/Content/UlAssets/js/vegas.min.js")
+@Scripts.Render("~/Content/UlAssets/js/custom.js")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/Scripts/jquery.validate.js")
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+@Scripts.Render("~/Content/toast/js/jquery.toast.js")
+
 @RenderSection("scripts", required: false)
 </body>
-
 </html>
-
-
-@* <!DOCTYPE html> *@
-@* <html> *@
-@* <head> *@
-@*     <meta charset="utf-8" /> *@
-@*     <meta name="viewport" content="width=device-width, initial-scale=1.0"> *@
-@*     <title>@ViewBag.Title - My ASP.NET Application</title> *@
-@*     @Styles.Render("~/Content/css") *@
-@*     @Scripts.Render("~/bundles/modernizr") *@
-@* </head> *@
-@* <body> *@
-@*     <div class="navbar navbar-inverse navbar-fixed-top"> *@
-@*         <div class="container"> *@
-@*             <div class="navbar-header"> *@
-@*                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options"> *@
-@*                     <span class="icon-bar"></span> *@
-@*                     <span class="icon-bar"></span> *@
-@*                     <span class="icon-bar"></span> *@
-@*                 </button> *@
-@*                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) *@
-@*             </div> *@
-@*             <div class="navbar-collapse collapse"> *@
-@*                 <ul class="nav navbar-nav"> *@
-@*                     <li>@Html.ActionLink("Home", "Index", "Home")</li> *@
-@*                     <li>@Html.ActionLink("About", "About", "Home")</li> *@
-@*                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li> *@
-@*                 </ul> *@
-@*             </div> *@
-@*         </div> *@
-@*     </div> *@
-@*     <div class="container body-content"> *@
-@*         @RenderBody() *@
-@*         <hr /> *@
-@*         <footer> *@
-@*             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p> *@
-@*         </footer> *@
-@*     </div> *@
-@* *@
-@*     @Scripts.Render("~/bundles/jquery") *@
-@*     @Scripts.Render("~/bundles/bootstrap") *@
-@*     @RenderSection("scripts", required: false) *@
-@* </body> *@
-@* </html> *@

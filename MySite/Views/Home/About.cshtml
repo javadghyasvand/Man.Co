@@ -1,5 +1,7 @@
 ﻿@model MySite.Models.Model.About
-
+@{ 
+    ViewBag.Discription = Model.Link;
+}
 @if (Model != null)
 {
     <section class="about-section section-padding" id="section_2">
@@ -14,7 +16,7 @@
                             @Model.FileTitle
                         </video>
                         <div class="about-video-info d-flex flex-column">
-                            <h4 class="mt-auto">@Model.FileTitle</h4>
+                          
                         </div>
                     </div>
                 </div>

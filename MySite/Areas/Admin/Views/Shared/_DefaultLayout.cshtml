@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>MS Admin Panel</title>
-    <link rel="shortcut icon" type="image/png" href="#">
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="~/images/ImageSite/logo.ico" type="image/gif" sizes="16x16">
     <!-- Core Css -->
     @Styles.Render("~/Content/AdminAssets/assets/css/datatables.min.css")
     @Styles.Render("~/Content/AdminAssets/assets/css/line-awesome.min.css")
@@ -16,12 +16,13 @@
     @Styles.Render("~/Content/AdminAssets/assets/css/bootstrap-slider.css")
     <!-- Custom Css -->
     @Styles.Render("~/Content/AdminAssets/assets/css/style.min.css")
-   
+
 </head>
-<body>
+<body style="overflow: hidden">
 <div class="overlay-background"></div>
-@Html.Partial("LeftPanel")
+@Html.Partial("Setting")
 @Html.Partial("Header")
+@Html.Partial("LeftPanel")
 <section class="mainpanel mt-2">
     <div class="pagebody">
         <div class="card">
@@ -46,13 +47,14 @@
 @Scripts.Render("~/Content/AdminAssets/assets/scripts/ripple.min.js")
 @Scripts.Render("~/Content/AdminAssets/assets/scripts/custome.js")
 @Scripts.Render("~/Content/AdminAssets/assets/scripts/jquery.mousewheel.min.js")
-
-@Scripts.Render("~/Content/ckeditor/ckeditor.js")
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
 
 @RenderSection("scripts", required: false)
 </body>

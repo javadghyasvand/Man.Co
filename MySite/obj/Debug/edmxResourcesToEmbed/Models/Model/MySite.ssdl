@@ -10,6 +10,18 @@
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FileTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="850" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" MaxLength="850" Nullable="false" />
+    <Property Name="MesageDate" Type="datetime" Nullable="false" />
+    <Property Name="IsCall" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Gallery">
     <Key>
       <PropertyRef Name="Id" />
@@ -25,7 +37,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TitleProject" Type="nvarchar" MaxLength="350" Nullable="false" />
-    <Property Name="LinkProject" Type="nvarchar" MaxLength="450" />
+    <Property Name="LinkProject" Type="nvarchar(max)" />
     <Property Name="ImageProject" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="DescriptionProject" Type="nvarchar(max)" Nullable="false" />
     <Property Name="VideoProject" Type="nvarchar" MaxLength="150" Nullable="false" />
@@ -38,6 +50,13 @@
     <Property Name="GroupName" Type="nvarchar" MaxLength="350" Nullable="false" />
     <Property Name="GroupImage" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="GroupDescription" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RolesId" />
+    </Key>
+    <Property Name="RolesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
   </EntityType>
   <EntityType Name="SelectProjectGroup">
     <Key>
@@ -58,6 +77,19 @@
     <Property Name="ParentId" Type="int" Nullable="false" />
     <Property Name="ParentTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Tag" Type="nvarchar" MaxLength="350" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="UserPhone" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserImage" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserActive" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Gallery_Project">
     <End Role="Project" Type="Self.Project" Multiplicity="1" />
@@ -107,13 +139,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RolesId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MySiteDataModelStoreContainer">
     <EntitySet Name="About" EntityType="Self.About" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProjectGroups" EntityType="Self.ProjectGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SelectProjectGroup" EntityType="Self.SelectProjectGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Seo" EntityType="Self.Seo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Gallery_Project" Association="Self.FK_Gallery_Project">
       <End Role="Project" EntitySet="Project" />
       <End Role="Gallery" EntitySet="Gallery" />
@@ -129,6 +176,10 @@
     <AssociationSet Name="FK_Seo_Project1" Association="Self.FK_Seo_Project1">
       <End Role="Project" EntitySet="Project" />
       <End Role="Seo" EntitySet="Seo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
